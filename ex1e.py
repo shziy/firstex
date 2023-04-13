@@ -26,9 +26,6 @@ class shapes(ABC):
     def sides(self):
         pass
     
- 
-
-
 class threedimensionals(shapes):
     def __init__(self,length,width,height,radius):      
         
@@ -37,6 +34,7 @@ class threedimensionals(shapes):
         self.width=width
         self.height=height
         self.radius=radius
+        self.n_dimensions:3
         
     
     def dimensions(self):
@@ -88,7 +86,7 @@ class cube(threedimensionals):
         
     def get__sides(self):
         
-        return("the cube has {} sides".format(self.cube_sides))
+        return("the cube has 12 sides"))
         
     def get_equal_sides(self):
        
@@ -99,8 +97,8 @@ class cube(threedimensionals):
 class rectangular_cube(cube):
     def __init__(self,length,width,height):
         super().__init__(length,width,height)
-        
-    #composision vghti a zmetod haye classi le azash ers bari mikonim to class estefade mikonim                  
+        self.rec_cube_sides=self.cube_sides
+                           
     def volume(self):
         rectangularcube=cube(self.length,self.width,self.height)
         return('the volume of the rectangular cube is {} '.format(rectangularcube.volume()))
@@ -187,6 +185,7 @@ class cylindre(threedimensionals):
         self.radius=radius
         self.height=height
         self.n_dimensions=3
+        self.equal_sides:'no'
         
     def get_dimensions(self):
         super().dimensions()
@@ -238,6 +237,11 @@ class pyramid(threedimensionals):
 class two_dimensionals(shapes) :
     def __init__(self,name):
         super().__init__()
+        self.n_dimensions:3
+        self.__having_angles:'it depends ..'
+        self.__minimum_sides_a:3
+        self.maximum_angles:'uncountable'
+        self.minimum_angles:0
     def dimensions(self):        
         print('its a 2 dimensional shape')
         
@@ -270,6 +274,8 @@ class square(two_dimensionals):
         self.length=length
         self.__name='square'
         self.__n_dimensions=2
+        self.__equalsides:'yes'
+        self.equal_angles:'yes'
         
         
         
@@ -308,6 +314,7 @@ class rectangle(two_dimensionals):
         self.width=width
         self.__name='rectangle'
         self.__n_dimensions=2
+        self.__tallest_side:length
 
     def sides(self):
         return('rectangle has 4 sides')
@@ -377,6 +384,8 @@ class circle(two_dimensionals):
         self.__name='circle'
         self.__n_dimension=2
         self.radius=radius
+        self.__diameter:self.radius*2
+        self.n_diameter:'uncountable'
         
     def sides(self):
         return('it doesnt have sides')
@@ -412,7 +421,7 @@ class diamond(two_dimensionals):
         self.sins=sin_biggest_degree.sinus()
         self.__name='diamond'
         self.__n_dimensions=2
-        
+        self.n_diameter:2
         
     def sides(self):
         return('diamond has 4 sides')
