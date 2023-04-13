@@ -258,7 +258,7 @@ class two_dimensionals(shapes) :
     
     def perimeter(self):
         pass
-class sin(two_dimensionals)  :
+class sin :
     def __init__(self,degree):
         self.degree=degree
         
