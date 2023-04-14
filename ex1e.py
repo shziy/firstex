@@ -6,9 +6,13 @@ import math
 class shapes(ABC):
     def __init__(self,name):
         self.name=name
+        self.__n_anngles=none
+        self.__equal_sides='it depends'
+        self.__n_diameter='it depends'
+        self.__edges=None
         
     def __str__(self):
-        self.info=input()
+        return('the name is {} '.format(self.name))
     
     @abstractmethod
     def dimensions(self):        
@@ -86,7 +90,7 @@ class cube(threedimensionals):
         
     def get__sides(self):
         
-        return("the cube has 12 sides"))
+        return("the cube has 12 sides")
         
     def get_equal_sides(self):
        
