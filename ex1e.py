@@ -6,7 +6,7 @@ import math
 class shapes(ABC):
     def __init__(self,name):
         self.name=name
-        self.__n_anngles=none
+        self.__n_angles=none
         self.__equal_sides='it depends'
         self.__n_diameter='it depends'
         self.__edges=None
