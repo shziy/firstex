@@ -28,8 +28,12 @@ class shapes(ABC):
     
     def sides(self):
         pass
+
 #inja class threedimensionals az class shapes ers bari mikonad
 va method haye abstract ham bayad nveshte shavand
+
+    
+
 class threedimensionals(shapes):
     def __init__(self,length,width,height,radius):      
         
@@ -88,7 +92,19 @@ class cube(threedimensionals):
         self.cube_shape='square'
         return('the shape is square')
         
+
     
+
+    def get__sides(self):
+        
+        return("the cube has 12 sides")
+        
+    def get_equal_sides(self):
+       
+        return('so all sides are {} '.format(self.equal_sides))
+        
+        
+
         
 
 #inja baraye inke  mokaab mostatil az khanevade mokaab hastaz cube ers bari karde ast      
@@ -96,7 +112,9 @@ class rectangular_cube(cube):
     def __init__(self,length,width,height):
         super().__init__(length,width,height)
         self.rec_cube_sides=self.cube_sides
+
     #composiosion                      
+
     def volume(self):
         rectangularcube=cube(self.length,self.width,self.height)
         return('the volume of the rectangular cube is {} '.format(rectangularcube.volume()))
