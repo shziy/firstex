@@ -1,14 +1,17 @@
-
 from abc import ABC, abstractmethod
 import math
 
-
+#inja az abstact method estefade kardim va ba estefade az tabe init moteghayer hara zakhire kardim
 class shapes(ABC):
     def __init__(self,name):
         self.name=name
+        self.__n_angles=None
+        self.__equal_sides='it depends'
+        self.__n_diameter='it depends'
+        self.__edges=None
         
     def __str__(self):
-        self.info=input()
+        return('the name is {} '.format(self.name))
     
     @abstractmethod
     def dimensions(self):        
@@ -25,10 +28,8 @@ class shapes(ABC):
     
     def sides(self):
         pass
-    
- 
-
-
+#inja class threedimensionals az class shapes ers bari mikonad
+va method haye abstract ham bayad nveshte shavand
 class threedimensionals(shapes):
     def __init__(self,length,width,height,radius):      
         
@@ -37,6 +38,7 @@ class threedimensionals(shapes):
         self.width=width
         self.height=height
         self.radius=radius
+        self.n_dimensions:3
         
     
     def dimensions(self):
@@ -86,21 +88,15 @@ class cube(threedimensionals):
         self.cube_shape='square'
         return('the shape is square')
         
-    def get__sides(self):
+    
         
-        return("the cube has {} sides".format(self.cube_sides))
-        
-    def get_equal_sides(self):
-       
-        return('so all sides are {} '.format(self.equal_sides))
-        
-        
-        
+
+#inja baraye inke  mokaab mostatil az khanevade mokaab hastaz cube ers bari karde ast      
 class rectangular_cube(cube):
     def __init__(self,length,width,height):
         super().__init__(length,width,height)
-        
-    #composision vghti a zmetod haye classi le azash ers bari mikonim to class estefade mikonim                  
+        self.rec_cube_sides=self.cube_sides
+    #composiosion                      
     def volume(self):
         rectangularcube=cube(self.length,self.width,self.height)
         return('the volume of the rectangular cube is {} '.format(rectangularcube.volume()))
@@ -119,9 +115,7 @@ class rectangular_cube(cube):
         
     def get_dimensions(self):
         super().dimensions()
-        
-       
-    
+#tarif moteghayer ha        
 class cone(threedimensionals):
     def __init__(self,radius, height, slope_length):
         self.radius=radius
@@ -134,7 +128,7 @@ class cone(threedimensionals):
     def volume(self):
         self.volume=((math.pi/3)*self.height*(self.radius)**2)
         return('the volume is {} '.format(round(self.volume,2)))
-    
+    #polymorphysm hamin tor ke maloome chnd tabe yksan dr klas ha dirim ke kar yksan vli rvesh haye motefaveti anjam midhnd
     def total_area(self):
         self.total_area=(math.pi*self.radius*self.slope_length)+(math.pi*((self.radius)**2)*self.height)
                                                                  
@@ -145,7 +139,7 @@ class cone(threedimensionals):
         
         return('cross and circle')
     
-    def  get__sides(self):
+    def  sides_kind(self):
         return('cos its based on a circle and a cross it doesnt have any unique side')
     
     def get_dimensions(self):
@@ -155,10 +149,12 @@ class cone(threedimensionals):
         self.side_area=((math.pi)*self.radius)*(self.slope_length)
         return('the side area is {} '.format(round(self.side_area,2)))
     
+    def n_diameter(self):
+        retrun('it has uncountable diameter')
 class sphere(threedimensionals):
     def __init__(self,radius):
         self.radius=radius
-        self.__having_volume='yes'
+        self.__having_volume='Yes'
         self.__shape_name='sphere'
         self.__diameter=self.radius*2
         self.n_dimensions=3
@@ -180,13 +176,18 @@ class sphere(threedimensionals):
          
     def sides(self):
          return('it doesnt have any sepecial sides')
-    
+        
+    def diameter(self):
+        return(self.radius*2)
+        #dr kol klas haye sebodi az class threedimensionals ers bari mikonnd       
+
 class cylindre(threedimensionals):
     def __init__(self,height,radius):
         self.__name='cylindre'
         self.radius=radius
         self.height=height
         self.n_dimensions=3
+        self.equal_sides:'no'
         
     def get_dimensions(self):
         super().dimensions()
@@ -207,13 +208,23 @@ class cylindre(threedimensionals):
           
     def sides(self):
         return('due to the fact that its a 3d shape we can not count any side for it')
+    
+    def cross_section_typr(self):
+        return('circle')
+    
+    def get__equality(self):
+        return('it can not have equal sides')
+    
+    
   
 class pyramid(threedimensionals):
     def __init__(self,height,length,width,side):
         self.height=height
         self.length=length
         self.width=width
+        
         self.side=side
+        #encapsolation
         self._name='pyramid'
         self.equal_sides='not always'
         self.n_diameter='nothing'
@@ -234,10 +245,18 @@ class pyramid(threedimensionals):
     
     def sides(self):
         return('due to the fact that its a 3d shape we can not count any side for it')
+    
+    def shape_kind_number(self):
+        return('3 squares and one triangles')
  
 class two_dimensionals(shapes) :
     def __init__(self,name):
         super().__init__()
+        self.n_dimensions:3
+        self.__having_angles:'it depends ..'
+        self.__minimum_sides_a:3
+        self.maximum_angles:'uncountable'
+        self.minimum_angles:0
     def dimensions(self):        
         print('its a 2 dimensional shape')
         
@@ -270,6 +289,8 @@ class square(two_dimensionals):
         self.length=length
         self.__name='square'
         self.__n_dimensions=2
+        self.__equalsides:'yes'
+        self.equal_angles:'yes'
         
         
         
@@ -300,14 +321,13 @@ class square(two_dimensionals):
     def get_dimensions(self):
         super().dimensions()
 
-
-        
 class rectangle(two_dimensionals):
     def __init__(self,width,length):
         self.length=length
         self.width=width
         self.__name='rectangle'
         self.__n_dimensions=2
+        self.__tallest_side:length
 
     def sides(self):
         return('rectangle has 4 sides')
@@ -315,8 +335,6 @@ class rectangle(two_dimensionals):
     def angles(self):
         return('it has 4 angles')
     
-    def get_total_area(self):
-        super().total_area()
     
     def get_volume(self):
         super().volume()
@@ -335,6 +353,9 @@ class rectangle(two_dimensionals):
     
     def get_dimensions(self):
         super().dimensions()
+               
+    def get_angles(self):
+        return('8 90 degree angles')
         
 class triangle(two_dimensionals):
     def __init__(self,ab,bc,ac,sin_degree):
@@ -344,7 +365,7 @@ class triangle(two_dimensionals):
         self.__name='triangle'
         self.__n_dimensions=2
         self.sins=sin_degree.sinus()
-        
+        #aggregation
     def area(self):
         self.area=self.ab*self.bc*self.ac*self.sins*0.5
         return('the area is {} '.format(round(self.area,2)))
@@ -371,12 +392,14 @@ class triangle(two_dimensionals):
     
     def get_dimensions(self):
         super().dimensions()
-       
+        
 class circle(two_dimensionals):
     def __init__(self,radius):
         self.__name='circle'
         self.__n_dimension=2
         self.radius=radius
+        self.__diameter:self.radius*2
+        self.n_diameter:'uncountable'
         
     def sides(self):
         return('it doesnt have sides')
@@ -384,8 +407,6 @@ class circle(two_dimensionals):
     def angles(self):
         return('it doesnt have angles')
     
-    def get_total_area(self):
-        super().total_area()
     
     def get_volume(self):
         super().volume()
@@ -403,16 +424,18 @@ class circle(two_dimensionals):
     
     def get_dimensions(self):
         super().dimensions()
-        
+    
+    def diameter_length(self):
+        return(self.radius*2)
 
     
 class diamond(two_dimensionals):
     def __init__(self,length,sin_biggest_degree):
         self.length=length
-        self.sins=sin_biggest_degree.sinus()
+        self.sins=sin_biggest_degree.sinus()#aggregation
         self.__name='diamond'
         self.__n_dimensions=2
-        
+        self.n_diameter:2
         
     def sides(self):
         return('diamond has 4 sides')
@@ -442,8 +465,6 @@ class diamond(two_dimensionals):
     
     def get_dimensions(self):
         super().dimensions()
-
-        
 class Regular_polygon(two_dimensionals):
     def __init__(self,length,number):
         self.number=number
@@ -481,4 +502,17 @@ class Regular_polygon(two_dimensionals):
     
     def get_dimensions(self):
         super().dimensions()
+               
+    def largest_length(self):
+        return('all sides have equal length')
+               
+        
+        
+        
+        
+        
+        
+        
+        
+        
        
